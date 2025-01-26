@@ -13,7 +13,7 @@ import {
 
 const Post = ({ post, updatePosts }) => {
   const dispatch = useDispatch();
-  const { profile } = useSelector((state) => state.profile);
+  const { profile, isLoading, error } = useSelector((state) => state.profile);
   const { accessToken } = useSelector((state) => state.auth);
 
   const [showModal, setShowModal] = useState(false);
@@ -88,6 +88,9 @@ const Post = ({ post, updatePosts }) => {
       })
     ).then(() => updatePosts());
   };
+
+  if (isLoading) return <p>Loading</p>;
+  if (error) return <p>error</p>;
 
   return (
     <Card className="mb-3" style={{ backgroundColor: "#f8f7fa" }}>
