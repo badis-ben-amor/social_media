@@ -91,6 +91,7 @@ const Post = ({ post, updatePosts }) => {
 
   if (isLoading) return <p>Loading</p>;
   if (error) return <p>error</p>;
+  if (!profile) return <p>not profile</p>;
 
   return (
     <Card className="mb-3" style={{ backgroundColor: "#f8f7fa" }}>
