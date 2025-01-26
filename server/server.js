@@ -28,10 +28,11 @@ const server = http.createServer(app);
 // set up socket.io instance with server
 const io = new Server(server, {
   cors: {
-    origin: process.env.CLIENT_URL,
+    origin: "*",
     credentials: true,
   },
 });
+
 // attach io instance to the request object
 // app.use((req, res, next) => {
 //   res.io = io;
@@ -71,7 +72,7 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(
   cors({
-    origin: process.env.CLIENT_URL,
+    origin: "*",
     credentials: true,
   })
 );
@@ -90,9 +91,9 @@ app.use("/comment", commentRoutes);
 app.use("/message", messageRoutes);
 // admin routes
 app.use("/adminUser", userRoutesAdmin);
-// test app.get("/", (req, res) => {
+// test
 app.get("/", (req, res) => {
-  res.send("Server is running!");
+  res.send("Server is running  f!");
 });
 
 const PORT = process.env.PORT;

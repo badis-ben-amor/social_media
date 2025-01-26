@@ -33,7 +33,7 @@ const SocialMediaNavbar = () => {
             </Nav.Link>
             <Nav.Link as={NavLink} to="/admin">
               <Gear size={26} className="me-1" />
-              admin
+              admin gg
             </Nav.Link>
             <Nav.Link as={NavLink} to="/profile">
               {profile.name || !profile.name === undefined ? (
