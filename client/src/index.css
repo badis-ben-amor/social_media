@@ -1,0 +1,7 @@
+/* navebar */
+.bg-nav {
+  background-color: #eddaa6 !important;
+}
+.dropdown-toggle::after {
+  color: black;
+}
