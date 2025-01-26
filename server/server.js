@@ -90,6 +90,10 @@ app.use("/comment", commentRoutes);
 app.use("/message", messageRoutes);
 // admin routes
 app.use("/adminUser", userRoutesAdmin);
+// test app.get("/", (req, res) => {
+app.get("/", (req, res) => {
+  res.send("Server is running!");
+});
 
 const PORT = process.env.PORT;
 server.listen(PORT, () => {
