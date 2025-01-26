@@ -28,8 +28,8 @@ const server = http.createServer(app);
 // set up socket.io instance with server
 const io = new Server(server, {
   cors: {
-    origin: "*",
-    credentials: true,
+    origin: process.env.CLIENT_URL,
+    credentials: false,
   },
 });
 
@@ -72,7 +72,7 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(
   cors({
-    origin: "*",
+    origin: process.env.CLIENT_URL,
     credentials: true,
   })
 );
