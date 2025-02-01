@@ -21,16 +21,16 @@ export const getPostsThunk = createAsyncThunk(
 
 export const createPostThunk = createAsyncThunk(
   "post/create",
-  async ({ content, accessToken }, thunkAPI) => {
+  async ({ formData, accessToken }, thunkAPI) => {
     try {
-      const res = await createPost({ content, accessToken });
+      const res = await createPost({ formData, accessToken });
       return res.data;
     } catch (error) {
       if (error.response?.status === 403) {
         const { newAccessToken } = await refresh();
         if (newAccessToken) {
           const createPostAgain = await createPost({
-            content,
+            formData,
             accessToken: newAccessToken,
           });
           return createPostAgain.data;
@@ -43,16 +43,16 @@ export const createPostThunk = createAsyncThunk(
 
 export const editPostThunk = createAsyncThunk(
   "post/edit",
-  async ({ content, accessToken }, thunkAPI) => {
+  async ({ formData, accessToken }, thunkAPI) => {
     try {
-      const res = await editPost({ content, accessToken });
+      const res = await editPost({ formData, accessToken });
       return res;
     } catch (error) {
       if (error.response?.status === 403) {
         const { newAccessToken } = await refresh();
         if (newAccessToken) {
           const editPostAgain = await editPost({
-            content,
+            formData,
             accessToken: newAccessToken,
           });
           return editPostAgain.data;
@@ -73,7 +73,7 @@ export const deletePostThunk = createAsyncThunk(
       if (error.response?.status === 403) {
         const { newAccessToken } = await refresh();
         if (newAccessToken) {
-          const deletePostAgain = await editPost({
+          const deletePostAgain = await deletePost({
             postId,
             accessToken: newAccessToken,
           });
@@ -91,6 +91,9 @@ const postSlice = createSlice({
     posts: [],
     post: {},
     isLoading: false,
+    isLoadCreate: false,
+    isLoadEdit: false,
+    isLoadDelete: false,
     error: null,
   },
   extraReducers: (builder) => {
@@ -107,33 +110,33 @@ const postSlice = createSlice({
         state.error = action.payload;
       })
       .addCase(createPostThunk.pending, (state) => {
-        state.isLoading = true;
+        state.isLoadCreate = true;
       })
       .addCase(createPostThunk.fulfilled, (state) => {
-        state.isLoading = false;
+        state.isLoadCreate = false;
       })
       .addCase(createPostThunk.rejected, (state, action) => {
-        state.isLoading = false;
+        state.isLoadCreate = false;
         state.error = action.payload;
       })
       .addCase(editPostThunk.pending, (state) => {
-        state.isLoading = true;
+        state.isLoadEdit = true;
       })
       .addCase(editPostThunk.fulfilled, (state) => {
-        state.isLoading = false;
+        state.isLoadEdit = false;
       })
       .addCase(editPostThunk.rejected, (state, action) => {
-        state.isLoading = false;
+        state.isLoadEdit = false;
         state.error = action.payload;
       })
       .addCase(deletePostThunk.pending, (state) => {
-        state.isLoading = true;
+        state.isLoadDelete = true;
       })
       .addCase(deletePostThunk.fulfilled, (state) => {
-        state.isLoading = false;
+        state.isLoadDelete = false;
       })
       .addCase(deletePostThunk.rejected, (state, action) => {
-        state.isLoading = false;
+        state.isLoadDelete = false;
         state.error = action.payload;
       });
   },

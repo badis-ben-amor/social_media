@@ -22,7 +22,7 @@ const SocialMediaNavbar = () => {
         <Navbar.Toggle aria-controls="navbar-nav" />
         <Navbar.Collapse id="navbar-nav">
           <Nav className="w-100 d-flex justify-content-around align-items-center p-1">
-            <Nav.Link as={NavLink} to="/friends" exact>
+            <Nav.Link as={NavLink} to="/friends">
               <People size={26} className="me-1" />
             </Nav.Link>
             <Nav.Link as={NavLink} to="/">
@@ -32,41 +32,43 @@ const SocialMediaNavbar = () => {
               <ChatDots size={26} className="me-1" />
             </Nav.Link>
             <Nav.Link as={NavLink} to="/admin">
-              <Gear size={26} className="me-1" />
-              admin gg
+              {/* <Gear size={26} className="me-1" /> */}
+              Admin
             </Nav.Link>
-            <Nav.Link as={NavLink} to="/profile">
+            <div>
               {profile.name || !profile.name === undefined ? (
-                <Image
-                  src={avatarImg}
-                  roundedCircle
-                  alt="Avatar"
-                  width={29}
-                  height={29}
-                  className="ms-2"
-                />
+                <Link to="/profile">
+                  <Image
+                    src={avatarImg}
+                    roundedCircle
+                    alt="Avatar"
+                    width={29}
+                    height={29}
+                    className="ms-2"
+                  />
+                </Link>
               ) : (
                 <>
-                  <Link to="/login">
-                    <Button
-                      style={{ margin: "0", fontSize: "15px" }}
-                      className="me-2"
-                      variant="outline-primary"
-                    >
+                  <Button
+                    style={{ margin: "0", fontSize: "15px" }}
+                    className="me-2"
+                    variant="outline-primary"
+                  >
+                    <Nav.Link as={NavLink} to="/login">
                       Login
-                    </Button>
-                  </Link>
-                  <Link to="/register">
-                    <Button
-                      variant="outline-primary"
-                      style={{ margin: "0", fontSize: "15px" }}
-                    >
+                    </Nav.Link>
+                  </Button>
+                  <Button
+                    variant="outline-primary"
+                    style={{ margin: "0", fontSize: "15px" }}
+                  >
+                    <Nav.Link as={NavLink} to="/register">
                       Register
-                    </Button>
-                  </Link>
+                    </Nav.Link>
+                  </Button>
                 </>
               )}
-            </Nav.Link>
+            </div>
           </Nav>
         </Navbar.Collapse>
       </Container>

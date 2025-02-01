@@ -22,7 +22,7 @@ const getMessages = async (req, res) => {
   }
 };
 
-const sentMessage = async (req, res) => {
+const sentMessage = async (req, res, io) => {
   const sender = req.user.id;
   const { receiver, content } = req.body;
   try {
@@ -31,6 +31,7 @@ const sentMessage = async (req, res) => {
 
     const message = await Message.create({ sender, receiver, content });
     io.to(receiver).emit("receivedMessage", { sender, content });
+    io.to(sender).emit("receivedMessage", { sender, content });
 
     res.status(201).json(message);
   } catch (error) {

@@ -98,6 +98,7 @@ const commentsSlice = createSlice({
   name: "comment",
   initialState: {
     comments: [],
+    isLoadCommintCreat: false,
     isLoading: false,
     error: null,
   },
@@ -116,13 +117,16 @@ const commentsSlice = createSlice({
       })
       .addCase(createCommentThunk.pending, (state) => {
         state.isLoading = true;
+        state.isLoadCommintCreat = true;
       })
       .addCase(createCommentThunk.fulfilled, (state) => {
         state.isLoading = false;
+        state.isLoadCommintCreat = false;
       })
       .addCase(createCommentThunk.rejected, (state, action) => {
         state.isLoading = false;
         state.error = action.payload;
+        state.isLoadCommintCreat = false;
       })
       .addCase(updateCommentThunk.pending, (state) => {
         state.isLoading = true;

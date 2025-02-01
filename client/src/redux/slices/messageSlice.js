@@ -53,19 +53,20 @@ const messageSlice = createSlice({
     messages: [],
     message: "",
     isLoading: false,
+    isLoadGet: false,
     error: null,
   },
   extraReducers: (builder) => {
     builder
       .addCase(getMessagesThunk.pending, (state) => {
-        state.isLoading = true;
+        state.isLoadGet = true;
       })
       .addCase(getMessagesThunk.fulfilled, (state, action) => {
-        state.isLoading = false;
+        state.isLoadGet = false;
         state.messages = action.payload;
       })
       .addCase(getMessagesThunk.rejected, (state, action) => {
-        state.isLoading = false;
+        state.isLoadGet = false;
         state.error = action.payload;
       })
       .addCase(sentMessageThunk.pending, (state) => {

@@ -1,5 +1,6 @@
 const dotenv = require("dotenv");
 const express = require("express");
+dotenv.config();
 const mongoConnection = require("./config/db");
 // middlewares
 const cors = require("cors");
@@ -21,7 +22,6 @@ const messageRoutes = require("./routes/messageRoutes");
 // admin routes
 const userRoutesAdmin = require("./routes/admin/userRoutesAdmin");
 
-dotenv.config();
 mongoConnection();
 const app = express();
 const server = http.createServer(app);
@@ -29,7 +29,7 @@ const server = http.createServer(app);
 const io = new Server(server, {
   cors: {
     origin: process.env.CLIENT_URL,
-    credentials: true,
+    // credentials: true,
   },
 });
 
@@ -57,7 +57,8 @@ io.on("connection", (socket) => {
     const { sender, receiver, content } = data;
 
     // emit message to the receiver's room
-    io.to(receiver).emit("receivedMessage", { sender, content });
+    // io.to(receiver).emit("receivedMessage", { sender, content });
+    // io.to(sender).emit("receivedMessage", { sender, content });
 
     console.log(`Message from ${sender} to ${receiver}: ${content}`);
   });

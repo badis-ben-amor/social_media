@@ -7,10 +7,22 @@ import { getPostsThunk } from "../redux/slices/postSlice";
 import UsersList from "../components/home/UsersList";
 import PopupWindow from "../components/home/PopupWindow";
 
+// import img02 from "../assets/im2.jpg";
+
 const Home = () => {
   const dispatch = useDispatch();
+  const { posts } = useSelector((state) => state.post);
 
+  const [postsData, setPostsData] = useState([]);
   const [selectedUser, setSelectedUser] = useState(null);
+
+  useEffect(() => {
+    dispatch(getPostsThunk());
+  }, [dispatch]);
+
+  useEffect(() => {
+    setPostsData(posts);
+  }, [posts]);
 
   const updatePosts = (type) => {
     dispatch(getPostsThunk());
@@ -26,12 +38,19 @@ const Home = () => {
 
   return (
     <Container className="d-flex justify-content-center">
-      <Col md={3}></Col>
+      <Col md3></Col>
 
       <Col md={6}>
         <div className="home-page">
-          <CreatePost updatePosts={updatePosts} />
-          <Post />
+          {/* <h2 className="mb-4 text-center mt-5">Home</h2> */}
+          <CreatePost />
+          {postsData ? (
+            postsData.map((post, i) => (
+              <Post key={i} post={post} updatePosts={updatePosts} />
+            ))
+          ) : (
+            <h4 className="text-center mt-5">Not posts found</h4>
+          )}
         </div>
       </Col>
 

@@ -5,19 +5,19 @@ export const getPosts = async () => {
   return res;
 };
 
-export const createPost = async ({ content, accessToken }) => {
+export const createPost = async ({ formData, accessToken }) => {
   const res = await axios.post(
     `${process.env.REACT_APP_API_URL}/post`,
-    { content },
+    formData,
     { headers: { Authorization: `Bearer ${accessToken}` } }
   );
   return res;
 };
 
-export const editPost = async ({ postId, content, accessToken }) => {
+export const editPost = async ({ formData, accessToken }) => {
   const res = await axios.put(
     `${process.env.REACT_APP_API_URL}/post`,
-    { content, postId },
+    formData,
     { headers: { Authorization: `Bearer ${accessToken}` } }
   );
   return res;

@@ -71,7 +71,7 @@ const login = async (req, res) => {
     res.cookie("refreshToken", refreshToken, {
       httpOnly: true,
       secure: process.env.NODE_ENV === "production",
-      sameSite: "strict",
+      sameSite: "Strict",
     });
 
     res.status(200).json({
@@ -89,6 +89,7 @@ const login = async (req, res) => {
 
 const refersh = async (req, res) => {
   const { refreshToken } = req.cookies;
+  // const { refreshToken } = req.body;
   if (!refreshToken)
     return res.status(401).json({ message: "Refresh token missing" });
   try {
