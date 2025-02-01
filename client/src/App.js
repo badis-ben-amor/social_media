@@ -12,7 +12,8 @@ import AdminProtect from "./components/protects/AdminProtect";
 
 const App = () => {
   const dispatch = useDispatch();
-  const { accessToken } = useSelector((state) => state.auth);
+  // const { accessToken } = useSelector((state) => state.auth);
+  const accessToken = localStorage.getItem("accessToken");
 
   useEffect(() => {
     dispatch(getProfileThunk(accessToken));

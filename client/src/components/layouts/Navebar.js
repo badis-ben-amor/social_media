@@ -7,7 +7,7 @@ import { useSelector } from "react-redux";
 
 const SocialMediaNavbar = () => {
   const { profile, isLoading } = useSelector((state) => state.profile);
-  const { isLoading: au } = useSelector((state) => state.auth);
+  // const { isLoading: isLoadingAuth } = useSelector((state) => state.auth);
 
   return (
     <Navbar

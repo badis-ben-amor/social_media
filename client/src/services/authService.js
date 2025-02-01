@@ -1,21 +1,16 @@
 import axios from "axios";
 
 export const login = async (userData) => {
-  const res = await axios.post(
-    `${process.env.REACT_APP_API_URL}/auth/login`,
-    {
-      userData,
-    },
-    { withCredentials: true }
-  );
+  const res = await axios.post(`${process.env.REACT_APP_API_URL}/auth/login`, {
+    userData,
+  });
   return res;
 };
 
 export const register = async (userData) => {
   const res = await axios.post(
     `${process.env.REACT_APP_API_URL}/auth/register`,
-    { userData },
-    { withCredentials: true }
+    { userData }
   );
   return res;
 };
@@ -23,10 +18,10 @@ export const register = async (userData) => {
 export const refresh = async () => {
   const res = await axios.post(
     `${process.env.REACT_APP_API_URL}/auth/refresh`,
-    {},
-    { withCredentials: true }
+    {}
+    // { withCredentials: true }
   );
-  return res.data
+  return res.data;
 };
 
 export const logout = async () => {
