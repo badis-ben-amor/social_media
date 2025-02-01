@@ -34,9 +34,9 @@ const register = async (req, res) => {
     await newUser.save();
 
     const accessToken = generateAccessToken(newUser);
-    const refeshToken = generateRefreshToken(newUser);
+    const refreshToken = generateRefreshToken(newUser);
 
-    res.cookie("refreshToken", refeshToken, {
+    res.cookie("refreshToken", refreshToken, {
       htppOnly: true,
       secure: process.env.NODE_ENV === "production",
       sameSite: "Strict",
@@ -44,8 +44,9 @@ const register = async (req, res) => {
 
     res.status(200).json({
       message: "User register successfully",
-      user: { id: newUser.id, isAdmin: newUser.isAdmin },
+      // user: { id: newUser.id, isAdmin: newUser.isAdmin },
       accessToken,
+      refreshToken,
     });
   } catch (error) {
     res.status(500).json({
@@ -78,6 +79,7 @@ const login = async (req, res) => {
       message: "User login successfully",
       user: { id: user.id, isAdmin: user.isAdmin },
       accessToken,
+      refreshToken,
     });
   } catch (error) {
     res.status(500).json({
