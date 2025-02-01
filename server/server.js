@@ -26,17 +26,14 @@ mongoConnection();
 const app = express();
 const server = http.createServer(app);
 // set up socket.io instance with server
-const io = new Server(server);
-//  {
-// cors: {
-//   origin: process.env.CLIENT_URL,
-//   credentials: true,
-// },
-// cors: {
-//   origin: process.env.CLIENT_URL,
-//   credentials: true,
-// },
-// }
+const io = new Server(server, {
+  cors: {
+    origin: "*",
+    // credentials: true,
+    // origin: process.env.CLIENT_URL,
+    // credentials: true,
+  },
+});
 
 // attach io instance to the request object
 // app.use((req, res, next) => {
@@ -77,7 +74,10 @@ io.on("connection", (socket) => {
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(
-  cors()
+  cors({
+    origin: "*",
+    // credentials: true,
+  })
   // cors({
   //   origin: process.env.CLIENT_URL,
   //   credentials: true,

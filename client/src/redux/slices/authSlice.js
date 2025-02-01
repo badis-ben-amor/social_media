@@ -54,6 +54,7 @@ const authSlice = createSlice({
   initialState: {
     isLoading: false,
     error: null,
+    // accessToken: "",
     accessToken: "",
   },
   extraReducers: (builder) => {
