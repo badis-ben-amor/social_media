@@ -24,7 +24,8 @@ import {
 const Post = () => {
   const dispatch = useDispatch();
   const { profile, isLoading, error } = useSelector((state) => state.profile);
-  const { accessToken } = useSelector((state) => state.auth);
+  // const { accessToken } = useSelector((state) => state.auth);
+  const accessToken = localStorage.getItem("accessToken");
   const {
     posts: postsData,
     isLoadEdit,

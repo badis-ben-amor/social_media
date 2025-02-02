@@ -26,7 +26,8 @@ import Swal from "sweetalert2";
 const AdminUsersPage = () => {
   const dispatch = useDispatch();
   const { users: usersData } = useSelector((state) => state.adminUser);
-  const { accessToken } = useSelector((state) => state.auth);
+  // const { accessToken } = useSelector((state) => state.auth);
+  const accessToken = localStorage.getItem("accessToken");
 
   const [users, setUsers] = useState([]);
   const [selectedUserIndex, setSelectedUserIndex] = useState(0);

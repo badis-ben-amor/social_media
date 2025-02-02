@@ -5,7 +5,8 @@ import { createPostThunk } from "../../redux/slices/postSlice";
 
 const CreatePost = ({ updatePosts }) => {
   const dispatch = useDispatch();
-  const { accessToken } = useSelector((state) => state.auth);
+  // const { accessToken } = useSelector((state) => state.auth);
+  const accessToken = localStorage.getItem("accessToken");
   const { isLoadCreate } = useSelector((state) => state.post);
 
   const [content, setContent] = useState("");
