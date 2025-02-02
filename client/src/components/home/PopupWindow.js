@@ -19,7 +19,8 @@ const PopupWindow = ({ user, onclose }) => {
   const { messages: messagesData, isLoadGet } = useSelector(
     (state) => state.message
   );
-  const { accessToken } = useSelector((state) => state.auth);
+  // const { accessToken } = useSelector((state) => state.auth);
+  const accessToken = localStorage.getItem("accessToken");
   const { profile } = useSelector((state) => state.profile);
 
   const [messages, setMessages] = useState([]);

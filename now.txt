@@ -22,4 +22,4 @@ now: e-commerce
 
 
 
-front edite and delete post
+deploment express to other platform support websocket
