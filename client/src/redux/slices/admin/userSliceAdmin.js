@@ -12,6 +12,7 @@ export const getAllUsersAdminThunk = createAsyncThunk(
   async (accessToken, thunkAPI) => {
     try {
       const res = await getAllUsersAdmin(accessToken);
+      return res.data;
     } catch (error) {
       if (error.response?.status === 403) {
         const { newAccessToken } = await refresh();
