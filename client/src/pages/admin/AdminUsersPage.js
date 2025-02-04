@@ -249,7 +249,7 @@ const AdminUsersPage = () => {
       <Box sx={{ display: "flex" }}>
         <Box sx={{ width: "22%", height: 500, backgroundColor: "#e8e9eb" }}>
           <List>
-            {users.map((user, index) => (
+            {users?.map((user, index) => (
               <ListItem
                 button
                 key={index}
