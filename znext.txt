@@ -1,2 +1,0 @@
-edit and remove post
-message dont send to ather user with socket

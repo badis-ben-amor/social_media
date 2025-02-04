@@ -46,7 +46,7 @@ export const editPostThunk = createAsyncThunk(
   async ({ formData, accessToken }, thunkAPI) => {
     try {
       const res = await editPost({ formData, accessToken });
-      return res;
+      return res.data;
     } catch (error) {
       if (error.response?.status === 403) {
         const { newAccessToken } = await refresh();
@@ -68,7 +68,7 @@ export const deletePostThunk = createAsyncThunk(
   async ({ postId, accessToken }, thunkAPI) => {
     try {
       const res = await deletePost({ postId, accessToken });
-      return res;
+      return res.data;
     } catch (error) {
       if (error.response?.status === 403) {
         const { newAccessToken } = await refresh();

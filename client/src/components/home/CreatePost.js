@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useRef, useState } from "react";
 import { Form, Button, Card, Container, Spinner } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
 import { createPostThunk } from "../../redux/slices/postSlice";
@@ -21,8 +21,11 @@ const CreatePost = ({ updatePosts }) => {
       updatePosts();
       setContent("");
       setImage(null);
+      if (fileInputRef.current) fileInputRef.current.value = "";
     });
   };
+
+  const fileInputRef = useRef();
 
   return (
     <Container>
@@ -37,6 +40,7 @@ const CreatePost = ({ updatePosts }) => {
             <Form.Group className="mb-3">
               <Form.Label>Content</Form.Label>
               <Form.Control
+                disabled={isLoadCreate}
                 as="textarea"
                 rows={3}
                 value={content}
@@ -47,6 +51,8 @@ const CreatePost = ({ updatePosts }) => {
             <Form.Group className="mb-3">
               <Form.Label>Image (optional)</Form.Label>
               <Form.Control
+                ref={fileInputRef}
+                disabled={isLoadCreate}
                 type="file"
                 accept="image/*"
                 onChange={(e) => setImage(e.target.files[0])}

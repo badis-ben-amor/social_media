@@ -67,16 +67,23 @@ exports.createPost = async (req, res) => {
 };
 
 exports.updatePost = async (req, res) => {
-  const { postId, content } = req.body;
+  const { postId, content, removedImage } = req.body;
   const userId = req.user.id;
+  console.log(removedImage);
   const image = req.file?.filename;
+
   if (!postId || !userId)
     return res.status(400).json({ message: "Post or user ID missing " });
-  if (!content && !image)
-    return res.status(400).json({
-      message: "Content or image at least require to update you post",
-    });
+
   try {
+    const post = await Post.findById(postId);
+    if (!post) return res.status(404).json({ message: "Post not found" });
+
+    if (!content && !image && !post.image)
+      return res.status(400).json({
+        message: "Content or image at least require to update you post",
+      });
+
     if (req.file) {
       cloudinary.uploader.upload(req.file.path, async (error, result) => {
         if (error) {
@@ -90,22 +97,21 @@ exports.updatePost = async (req, res) => {
           { content, image: result.secure_url },
           { new: true }
         );
-        if (!updatedPost)
-          return res.status(404).json({ message: "Post not found" });
 
         return res.status(200).json({ message: "Post updated successfully" });
       });
     } else {
-      const updatedPost = await Post.findOneAndUpdate(
+      await Post.findOneAndUpdate(
         {
           _id: postId,
           user: userId,
         },
-        { content, image: null },
+        {
+          content,
+          image: removedImage === "false" ? post.image : null,
+        },
         { new: true }
       );
-      if (!updatedPost)
-        return res.status(404).json({ message: "Post not found" });
 
       return res.status(200).json({ message: "Post updated successfully" });
     }

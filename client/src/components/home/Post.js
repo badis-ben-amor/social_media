@@ -40,6 +40,7 @@ const Post = () => {
   const [editedImage, setEditedImage] = useState("");
   const [showDeleteModal, setShowDeleteModal] = useState(false);
   const [idDeletePost, setIdDeletePost] = useState("");
+  const [removedImage, setRemovedImage] = useState(false);
 
   // comment states
   const [showModal, setShowModal] = useState(false);
@@ -65,7 +66,7 @@ const Post = () => {
       const length = textareaRef.current.value.length;
       textareaRef.current.setSelectionRange(length, length);
     }
-  }, [selectedPost?.content]);
+  }, [selectedPost]);
 
   // comment effects
   useEffect(() => {
@@ -82,15 +83,25 @@ const Post = () => {
   };
 
   const handleSaveEditPost = () => {
+    // console.log("editedImage:", editedImage);
+    // console.log("removedImage:", removedImage);
+    // console.log("selectedPost.image:", selectedPost.image);
+    // if (!editedImage && !removedImage) {
+    //   console.log("object");
+    // }
+    // return;
     setShowModal(false);
     const formData = new FormData();
     formData.append("content", selectedPost.content);
     formData.append("postId", selectedPost._id);
     editedImage && formData.append("image", editedImage);
+    formData.append("removedImage", removedImage);
+
     dispatch(editPostThunk({ formData, accessToken })).then(() => {
       dispatch(getPostsThunk());
       setSelectedPost(null);
       setEditedImage("");
+      setRemovedImage(false);
     });
   };
 
@@ -133,6 +144,7 @@ const Post = () => {
     // edit post
     setEditPost(false);
     setEditedImage("");
+    setRemovedImage(false);
   };
 
   const handleAddComment = (post) => {
@@ -314,17 +326,6 @@ const Post = () => {
                   />
 
                   <div>
-                    <label style={{ cursor: "pointer" }}>
-                      <input
-                        hidden
-                        type="file"
-                        accept="image/*"
-                        onChange={(e) => {
-                          setEditedImage(e.target.files[0]);
-                        }}
-                      />
-                      Change Image <CardImage />
-                    </label>
                     {editedImage && (
                       <div>
                         <img
@@ -352,6 +353,37 @@ const Post = () => {
               <Button onClick={handleSaveEditPost} className="w-100 my-2">
                 Save change
               </Button>
+            )}
+            {selectedPost && (
+              <div className="d-flex">
+                {selectedPost.image && (
+                  <label
+                    onClick={() => {
+                      setEditedImage("");
+                      setRemovedImage(true);
+                      setSelectedPost((prev) => ({ ...prev, image: null }));
+                    }}
+                    style={{ cursor: "pointer" }}
+                  >
+                    <span style={{ color: "red" }}>Remove Image</span>{" "}
+                    <Trash className="text-danger" />
+                  </label>
+                )}
+                <label className="ms-auto" style={{ cursor: "pointer" }}>
+                  <input
+                    hidden
+                    type="file"
+                    accept="image/*"
+                    onChange={(e) => {
+                      setEditedImage(e.target.files[0]);
+                    }}
+                  />
+                  <span>
+                    {selectedPost.image ? "Change Image" : "Add Image"}
+                  </span>{" "}
+                  <Pencil className="me-2" />
+                </label>
+              </div>
             )}
             {selectedPost?.image && (
               <img

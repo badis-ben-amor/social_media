@@ -1,20 +1,11 @@
-3: image accessible just to subscribed user chatgpt : error ("To restrict access to specific images based on user authorization (e.g., only images related to their posts or subscribed users), you need to:")
-2: chat gpt : 04_social_media  ("3. Add Real-Time Updates with Socket.IO")
-
-
-1:back add cloudinary feature to edit post , edite and delete front complete , just test and spinner in edite
-2:and message back and front end
+1: image accessible just to subscribed user chatgpt : error ("To restrict access to specific images based on user authorization (e.g., only images related to their posts or subscribed users), you need to:")
+2: handling error exacty in :create user admin
+3: when delete user must delete their related data in other document
 
 
 
-handling error exacty in :create user admin
-when delete user must delete their related data in other document
 
-
-1 : fron and back: (message not show in other user when send)
-2 :front: create post with image
-
-now: e-commerce
+all done just inhencement and repete
 
 
 
@@ -22,4 +13,3 @@ now: e-commerce
 
 
 
-deploment express to other platform support websocket
