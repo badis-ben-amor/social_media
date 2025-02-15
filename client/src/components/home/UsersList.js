@@ -46,7 +46,9 @@ const UsersList = ({ onUserClick }) => {
               <h6 className="mb-0">{user.name}</h6>
             </Card.Header>
           </Card>
-          <br style={{ cursor: "pointer" }}></br>
+          <div
+            style={{ backgroundColor: "red", widows: "100%", height: "10px" }}
+          ></div>
         </>
       ))}
     </Container>
