@@ -32,7 +32,7 @@ const UsersList = ({ onUserClick }) => {
         <Card
           key={i}
           onClick={() => onUserClick(user)}
-          className="mb-3"
+          // className="mb-3"
           style={{ backgroundColor: "#f8f7fa" }}
         >
           <Card.Header className="d-flex align-items-center">
