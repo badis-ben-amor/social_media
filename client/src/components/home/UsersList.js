@@ -25,7 +25,6 @@ const UsersList = ({ onUserClick }) => {
         top: "69px",
         height: "80vh",
         overflow: "auto",
-        cursor: "pointer",
       }}
     >
       {allUsers?.map((user, i) => (
@@ -35,7 +34,7 @@ const UsersList = ({ onUserClick }) => {
             key={i}
             onClick={() => onUserClick(user)}
             // className="mb-3"
-            style={{ backgroundColor: "#f8f7fa" }}
+            style={{ backgroundColor: "#f8f7fa", cursor: "pointer" }}
           >
             <Card.Header className="d-flex align-items-center">
               <img
@@ -47,7 +46,7 @@ const UsersList = ({ onUserClick }) => {
               <h6 className="mb-0">{user.name}</h6>
             </Card.Header>
           </Card>
-          <br></br>
+          <br style={{ cursor: "pointer" }}></br>
         </>
       ))}
     </Container>
