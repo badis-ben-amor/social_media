@@ -29,22 +29,26 @@ const UsersList = ({ onUserClick }) => {
       }}
     >
       {allUsers?.map((user, i) => (
-        <Card
-          key={i}
-          onClick={() => onUserClick(user)}
-          // className="mb-3"
-          style={{ backgroundColor: "#f8f7fa" }}
-        >
-          <Card.Header className="d-flex align-items-center">
-            <img
-              src={img01}
-              alt="User Avatar"
-              className="rounded-circle me-2"
-              style={{ width: "35px", height: "35px" }}
-            />
-            <h6 className="mb-0">{user.name}</h6>
-          </Card.Header>
-        </Card>
+        <>
+          {" "}
+          <Card
+            key={i}
+            onClick={() => onUserClick(user)}
+            // className="mb-3"
+            style={{ backgroundColor: "#f8f7fa" }}
+          >
+            <Card.Header className="d-flex align-items-center">
+              <img
+                src={img01}
+                alt="User Avatar"
+                className="rounded-circle me-2"
+                style={{ width: "35px", height: "35px" }}
+              />
+              <h6 className="mb-0">{user.name}</h6>
+            </Card.Header>
+          </Card>
+          <br></br>
+        </>
       ))}
     </Container>
   );
