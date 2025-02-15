@@ -46,12 +46,14 @@ const UsersList = ({ onUserClick }) => {
               <h6 className="mb-0">{user.name}</h6>
             </Card.Header>
           </Card>
-          <div
-            style={{
-              backgroundColor: `${allUsers.length !== i + 1 && "red"}`,
-              height: "10px",
-            }}
-          ></div>
+          {allUsers.length !== i + 1 && (
+            <div
+              style={{
+                height: "10px",
+                cursor: "pointer",
+              }}
+            ></div>
+          )}
         </>
       ))}
     </Container>
