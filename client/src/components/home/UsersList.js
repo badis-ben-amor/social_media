@@ -47,7 +47,10 @@ const UsersList = ({ onUserClick }) => {
             </Card.Header>
           </Card>
           <div
-            style={{ backgroundColor: "red", widows: "100%", height: "10px" }}
+            style={{
+              backgroundColor: `${allUsers.length !== i + 1 && "red"}`,
+              height: "10px",
+            }}
           ></div>
         </>
       ))}
