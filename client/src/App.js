@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-import Navebar from "./components/layouts/Navebar";
+import Navbar from "./components/Navbar";
 import Login from "./pages/auth/Login";
 import Register from "./pages/auth/Register";
 import { useDispatch, useSelector } from "react-redux";
@@ -20,7 +20,7 @@ const App = () => {
   }, [dispatch]);
   return (
     <Router>
-      <Navebar />
+      <Navbar />
       <Routes>
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />

@@ -1,13 +1,12 @@
 import React from "react";
 import { Navbar, Nav, Container, Image, Button } from "react-bootstrap";
 import { House, People, ChatDots, Gear } from "react-bootstrap-icons";
-import { Link, NavLink } from "react-router-dom"; // For SPA routing
-import avatarImg from "../../assets/01.avif"; // Replace with your avatar image path
+import { Link } from "react-router-dom";
+import avatarImg from "../assets/01.avif";
 import { useSelector } from "react-redux";
 
 const SocialMediaNavbar = () => {
-  const { profile, isLoading } = useSelector((state) => state.profile);
-  // const { isLoading: isLoadingAuth } = useSelector((state) => state.auth);
+  const { profile } = useSelector((state) => state.profile);
 
   return (
     <Navbar
@@ -18,21 +17,19 @@ const SocialMediaNavbar = () => {
       className="shadow-sm"
     >
       <Container style={{ padding: "0" }}>
-        {/* Navbar Links */}
         <Navbar.Toggle aria-controls="navbar-nav" />
         <Navbar.Collapse id="navbar-nav">
-          <Nav className="w-100 d-flex justify-content-around align-items-center p-1">
-            <Nav.Link as={NavLink} to="/friends">
-              <People size={26} className="me-1" />
+          <Nav className="w-100 justify-content-around align-items-center p-1">
+            <Nav.Link as={Link} to="/friends">
+              <People size={26} />
             </Nav.Link>
-            <Nav.Link as={NavLink} to="/">
-              <House size={26} className="me-1" />
+            <Nav.Link as={Link} to="/">
+              <House size={26} />
             </Nav.Link>
-            <Nav.Link as={NavLink} to="/messages">
-              <ChatDots size={26} className="me-1" />
+            <Nav.Link as={Link} to="/messages">
+              <ChatDots size={26} />
             </Nav.Link>
-            <Nav.Link as={NavLink} to="/admin">
-              {/* <Gear size={26} className="me-1" /> */}
+            <Nav.Link as={Link} to="/admin">
               Admin
             </Nav.Link>
             <div>
@@ -54,7 +51,7 @@ const SocialMediaNavbar = () => {
                     className="me-2"
                     variant="outline-primary"
                   >
-                    <Nav.Link as={NavLink} to="/login">
+                    <Nav.Link as={Link} to="/login">
                       Login
                     </Nav.Link>
                   </Button>
@@ -62,7 +59,7 @@ const SocialMediaNavbar = () => {
                     variant="outline-primary"
                     style={{ margin: "0", fontSize: "15px" }}
                   >
-                    <Nav.Link as={NavLink} to="/register">
+                    <Nav.Link as={Link} to="/register">
                       Register
                     </Nav.Link>
                   </Button>

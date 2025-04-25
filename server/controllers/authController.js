@@ -39,7 +39,7 @@ const register = async (req, res) => {
     res.cookie("refreshToken", refreshToken, {
       htppOnly: true,
       secure: process.env.NODE_ENV === "production",
-      sameSite: "Strict",
+      sameSite: "strict",
     });
 
     res.status(200).json({
@@ -64,7 +64,7 @@ const login = async (req, res) => {
 
     const comparedPassword = await bcrypt.compare(password, user.password);
     if (!comparedPassword)
-      return res.status(400).json({ message: "Invalid credentials" });
+      return res.status(401).json({ message: "Invalid credentials" });
 
     const accessToken = generateAccessToken(user);
     const refreshToken = generateRefreshToken(user);
@@ -72,7 +72,7 @@ const login = async (req, res) => {
     res.cookie("refreshToken", refreshToken, {
       httpOnly: true,
       secure: process.env.NODE_ENV === "production",
-      sameSite: "Strict",
+      sameSite: "strict",
     });
 
     res.status(200).json({
@@ -96,6 +96,7 @@ const refersh = async (req, res) => {
     return res.status(401).json({ message: "Refresh token missing" });
   try {
     const payload = jwt.verify(refreshToken, process.env.REFRESH_SECRET);
+
     const user = await User.findById(payload.id);
     if (!user) return res.status(404).json({ message: "User not found" });
 

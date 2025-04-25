@@ -1,2 +1,6 @@
 /node_modules
 .env
+
+# personal
+z_now.txt
+z_now

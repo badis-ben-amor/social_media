@@ -1,4 +1,3 @@
-const User = require("../models/User");
 const jwt = require("jsonwebtoken");
 
 const authMiddleware = async (req, res, next) => {
@@ -8,13 +7,13 @@ const authMiddleware = async (req, res, next) => {
       .status(401)
       .json({ message: "Unautouriazed:Token not provided" });
 
-  const token = authorization.split(" ")[1];
   try {
+    const token = authorization.split(" ")[1];
     const decoded = jwt.verify(token, process.env.ACCESS_SECRET);
     req.user = decoded;
     next();
   } catch (error) {
-    res.status(403).json({
+    res.status(401).json({
       message: "Invalid or expired access token",
       ...(process.env.NODE_ENV !== "production" && { error: error.message }),
     });
@@ -23,7 +22,7 @@ const authMiddleware = async (req, res, next) => {
 
 const adminMiddleware = (req, res, next) => {
   if (!req.user || !req.user.isAdmin)
-    return res.status(401).json({ message: "Access denied, Admin only" });
+    return res.status(403).json({ message: "Access denied, Admin only" });
   next();
 };
 

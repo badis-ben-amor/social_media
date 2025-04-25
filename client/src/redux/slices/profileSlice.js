@@ -13,7 +13,7 @@ export const getProfileThunk = createAsyncThunk(
         const { newAccessToken } = await refresh();
         if (newAccessToken) {
           const newGetProfile = await getProfile(newAccessToken);
-          return newGetProfile;
+          return newGetProfile.data;
         }
       }
       return thunkAPI.rejectWithValue(error.response?.data?.message);
