@@ -5,8 +5,8 @@ export const login = async (userData) => {
     `${process.env.REACT_APP_API_URL}/auth/login`,
     {
       userData,
-    }
-    // ,{ withCredentials: true }
+    },
+    { withCredentials: true }
   );
   return res;
 };
@@ -14,26 +14,30 @@ export const login = async (userData) => {
 export const register = async (userData) => {
   const res = await axios.post(
     `${process.env.REACT_APP_API_URL}/auth/register`,
-    { userData }
-    // ,{ withCredentials: true }
+    { userData },
+    { withCredentials: true }
   );
   return res;
 };
 
 export const refresh = async () => {
+  const refreshToken = localStorage.getItem("refreshToken");
+
   const res = await axios.post(
     `${process.env.REACT_APP_API_URL}/auth/refresh`,
-    {}
-    // ,{ withCredentials: true }
+    { refreshToken },
+    { withCredentials: true }
   );
   return res.data;
 };
 
 export const logout = async () => {
+  localStorage.clear("refreshToken");
+  return;
   const res = await axios.post(
     `${process.env.REACT_APP_API_URL}/auth/logout`,
-    {}
-    // ,{ withCredentials: true }
+    {},
+    { withCredentials: true }
   );
   return res;
 };

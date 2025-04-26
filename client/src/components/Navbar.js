@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Navbar, Nav, Container, Image, Button } from "react-bootstrap";
 import { House, People, ChatDots, Gear } from "react-bootstrap-icons";
 import { Link } from "react-router-dom";
@@ -6,7 +6,18 @@ import avatarImg from "../assets/01.avif";
 import { useSelector } from "react-redux";
 
 const SocialMediaNavbar = () => {
-  const { profile } = useSelector((state) => state.profile);
+  const { profile: profileData } = useSelector((state) => state.profile);
+  const { loggeout } = useSelector((state) => state.auth);
+
+  const [profile, setProfile] = useState(null);
+
+  useEffect(() => {
+    setProfile(profileData);
+  }, [profileData]);
+
+  useEffect(() => {
+    loggeout && setProfile(null);
+  }, [loggeout]);
 
   return (
     <Navbar
@@ -33,8 +44,8 @@ const SocialMediaNavbar = () => {
               Admin
             </Nav.Link>
             <div>
-              {profile.name || !profile.name === undefined ? (
-                <Link to="/profile">
+              {profile?.name || !profile?.name === undefined ? (
+                <Link to="/user">
                   <Image
                     src={avatarImg}
                     roundedCircle

@@ -28,10 +28,8 @@ const UsersList = ({ onUserClick }) => {
       }}
     >
       {allUsers?.map((user, i) => (
-        <>
-          {" "}
+        <div key={i}>
           <Card
-            key={i}
             onClick={() => onUserClick(user)}
             // className="mb-3"
             style={{ backgroundColor: "#f8f7fa", cursor: "pointer" }}
@@ -54,7 +52,7 @@ const UsersList = ({ onUserClick }) => {
               }}
             ></div>
           )}
-        </>
+        </div>
       ))}
     </Container>
   );

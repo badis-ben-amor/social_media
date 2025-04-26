@@ -118,7 +118,7 @@ const PopupWindow = ({ user, onclose }) => {
               marginTop: "10px",
               border: "1px solid #ddd",
               padding: "10px",
-              borderRadius: "5px",
+              borderRadius: "10px",
             }}
           >
             {messages.map((msg, index) => (

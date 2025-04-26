@@ -29,7 +29,7 @@ const server = http.createServer(app);
 const io = new Server(server, {
   cors: {
     origin: "*",
-    // credentials: true,
+    credentials: true,
     // origin: process.env.CLIENT_URL,
     // credentials: true,
   },
@@ -43,7 +43,6 @@ const io = new Server(server, {
 // set up socket events
 // socketEvents(io);
 
-//
 // socket.IO connection
 io.on("connection", (socket) => {
   console.log("A user connected with id: ", socket.id);
@@ -75,13 +74,9 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(
   cors({
-    origin: "*",
-    // credentials: true,
+    origin: process.env.CLIENT_URL,
+    credentials: true,
   })
-  // cors({
-  //   origin: process.env.CLIENT_URL,
-  //   credentials: true,
-  // })
 );
 app.use(cookieParser());
 
@@ -100,7 +95,7 @@ app.use("/message", messageRoutes);
 app.use("/adminUser", userRoutesAdmin);
 // test
 app.get("/", (req, res) => {
-  res.send("Server is running  f!");
+  res.send("Server is running  !");
 });
 
 const PORT = process.env.PORT;

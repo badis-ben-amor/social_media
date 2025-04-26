@@ -9,6 +9,8 @@ import Home from "./pages/Home";
 import AdminUsersPage from "./pages/admin/AdminUsersPage";
 import AdminLayout from "./components/admin/AdminLayout";
 import AdminProtect from "./components/protects/AdminProtect";
+import Profile from "./pages/Profile";
+import UserProtectRoute from "./components/protects/UserProtectRoute";
 
 const App = () => {
   const dispatch = useDispatch();
@@ -25,7 +27,11 @@ const App = () => {
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
         <Route path="/" element={<Home />} />
-        {/* admin */}
+        {/* user routes */}
+        <Route path="/user" element={<UserProtectRoute />}>
+          <Route index element={<Profile />} />
+        </Route>
+        {/* admin routes */}
         <Route path="/admin" element={<AdminProtect />}>
           <Route path="users" element={<AdminUsersPage />} />
         </Route>

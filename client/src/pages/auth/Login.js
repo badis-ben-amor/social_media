@@ -3,9 +3,11 @@ import { useDispatch, useSelector } from "react-redux";
 import { loginThunk } from "../../redux/slices/authSlice";
 import { Button, Card, Container, Form } from "react-bootstrap";
 import { Lock } from "react-bootstrap-icons";
+import { useNavigate } from "react-router-dom";
 
 const Login = () => {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   const [userData, setUserData] = useState({
     email: "",
@@ -18,7 +20,10 @@ const Login = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    dispatch(loginThunk(userData));
+    dispatch(loginThunk(userData))
+      .unwrap()
+      .then(() => navigate("/"))
+      .then((err) => console.log(err?.message || err));
   };
 
   return (

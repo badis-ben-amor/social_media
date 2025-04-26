@@ -9,7 +9,7 @@ export const getProfileThunk = createAsyncThunk(
       const res = await getProfile(accessToken);
       return res.data;
     } catch (error) {
-      if (error.response?.status === 403) {
+      if (error.response?.status === 401) {
         const { newAccessToken } = await refresh();
         if (newAccessToken) {
           const newGetProfile = await getProfile(newAccessToken);

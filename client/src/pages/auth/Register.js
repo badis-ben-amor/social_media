@@ -3,14 +3,18 @@ import { useDispatch, useSelector } from "react-redux";
 import { registerThunk } from "../../redux/slices/authSlice";
 import { Button, Card, Container, Form } from "react-bootstrap";
 import { Lock } from "react-bootstrap-icons";
+import { useNavigate } from "react-router-dom";
 
 const RegisterPage = () => {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
+
   const [userData, setUserData] = useState({
     name: "",
     email: "",
     password: "",
   });
+  const [error, setError] = useState("");
 
   const handleFieldChange = (e) => {
     setUserData({ ...userData, [e.target.name]: e.target.value });
@@ -18,7 +22,10 @@ const RegisterPage = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    dispatch(registerThunk(userData));
+    dispatch(registerThunk(userData))
+      .unwrap()
+      .then(() => navigate("/"))
+      .catch((err) => setError(err.message || err));
   };
 
   return (
