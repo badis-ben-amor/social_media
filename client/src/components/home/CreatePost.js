@@ -76,7 +76,7 @@ const CreatePost = ({ updatePosts }) => {
               </div>
             )}
             <Button disabled={isLoadCreate} type="submit" variant="primary">
-              Create Post
+              publish
             </Button>
           </Form>
         </Card.Body>
