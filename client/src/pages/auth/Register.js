@@ -33,7 +33,7 @@ const RegisterPage = () => {
       fluid
       className="d-flex justify-content-center align-items-center vh-100"
     >
-      <Card className="p-4" style={{ width: "400px", background: "#f4f4f4" }}>
+      <Card style={{ width: "400px", background: "#f4f4f4" }}>
         <Card.Body>
           <div className="d-flex justify-content-center mb-3">
             <div
@@ -48,6 +48,7 @@ const RegisterPage = () => {
             </div>
           </div>
           <h5 className="text-center mb-4">Sign Up</h5>
+          <p className="text-center text-danger">{error}</p>
           <Form onSubmit={handleSubmit}>
             <Form.Group className="mb-3">
               <Form.Control
@@ -77,7 +78,8 @@ const RegisterPage = () => {
               />
             </Form.Group>
             <Button
-              style={{ backgroundColor: "#dec06f", color: "black" }}
+              style={{ backgroundColor: "#e3cd91", color: "black" }}
+              // style={{ backgroundColor: "#dec06f", color: "black" }}
               type="submit"
               className="w-100"
             >

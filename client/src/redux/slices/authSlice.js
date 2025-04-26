@@ -8,7 +8,9 @@ export const loginThunk = createAsyncThunk(
       const res = await login(userData);
       return res.data;
     } catch (error) {
-      return thunkAPI.rejectWithValue(error.response?.data?.message);
+      return thunkAPI.rejectWithValue(
+        error.response?.data?.message || error.message
+      );
     }
   }
 );
@@ -20,7 +22,9 @@ export const registerThunk = createAsyncThunk(
       const res = await register(userData);
       return res.data;
     } catch (error) {
-      return thunkAPI.rejectWithValue(error.response?.data?.message);
+      return thunkAPI.rejectWithValue(
+        error.response?.data?.message || error.message
+      );
     }
   }
 );
@@ -44,7 +48,9 @@ export const logoutThunk = createAsyncThunk(
       const res = await logout();
       return res.data;
     } catch (error) {
-      thunkAPI.rejectWithValue(error.response?.data?.message);
+      return thunkAPI.rejectWithValue(
+        error.response?.data?.message || error.message
+      );
     }
   }
 );

@@ -13,6 +13,7 @@ const Login = () => {
     email: "",
     password: "",
   });
+  const [error, setError] = useState("");
 
   const handleChange = (e) => {
     setUserData({ ...userData, [e.target.name]: e.target.value });
@@ -23,7 +24,7 @@ const Login = () => {
     dispatch(loginThunk(userData))
       .unwrap()
       .then(() => navigate("/"))
-      .then((err) => console.log(err?.message || err));
+      .catch((err) => setError(err.message || err));
   };
 
   return (
@@ -43,6 +44,7 @@ const Login = () => {
             </div>
           </div>
           <h5 className="text-center text-color-primary">Sign In</h5>
+          {error && <p className="text-center text-danger">{error}</p>}
           <Form onSubmit={handleSubmit}>
             <Form.Group className="mb-3">
               <Form.Control
@@ -64,7 +66,7 @@ const Login = () => {
             </Form.Group>
             <Button
               type="submit"
-              style={{ backgroundColor: "#dec06f", color: "black" }}
+              style={{ backgroundColor: "#e3cd91", color: "black" }}
               className="w-100"
             >
               Login
